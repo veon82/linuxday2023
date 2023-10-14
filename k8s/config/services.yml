@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fe-service
+  namespace: ld2023
+spec:
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: 3001
+    targetPort: 80
+  # type: LoadBalancer  # Usa LoadBalancer per distribuire il traffico su più nodi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: be-service
+  namespace: ld2023
+spec:
+  selector:
+    app: backend
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  # type: LoadBalancer  # Usa LoadBalancer per distribuire il traffico su più nodi

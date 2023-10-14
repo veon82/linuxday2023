@@ -1,0 +1,19 @@
+version: '3'
+services:
+  backend:
+    image: ld2023-be:latest
+    environment:
+      - MONGODB_HOST=myatlasclusteredu.abr3ya8.mongodb.net
+      - MONGODB_USERNAME=myAtlasDBUser
+      - MONGODB_PASSWORD=<password>
+      - MONGODB_DATABASE=ld2023
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+  frontend:
+    image: ld2023-fe:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

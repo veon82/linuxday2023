@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: be-deploy
+  namespace: ld2023
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: veon82/ld2023-be:latest
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "500m"
+          limits:
+            memory: "128Mi"
+            cpu: "750m"
+        env:
+        - name: MONGODB_HOST
+          value: myatlasclusteredu.abr3ya8.mongodb.net
+        - name: MONGODB_USERNAME
+          value: myAtlasDBUser
+        - name: MONGODB_DATABASE
+          value: ld2023
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mdb-password
+              key: MONGODB_PASSWORD
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-deploy
+  namespace: ld2023
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: veon82/ld2023-fe:latest
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "500m"
+          limits:
+            memory: "128Mi"
+            cpu: "750m"

@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  namespace: ld2023
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: traefik
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: fe-service
+            port:
+              number: 3001
+      - path: /distros
+        pathType: Prefix
+        backend:
+          service:
+            name: be-service
+            port:
+              number: 3000
+      - path: /healthz
+        pathType: Prefix
+        backend:
+          service:
+            name: be-service
+            port:
+              number: 3000
+
