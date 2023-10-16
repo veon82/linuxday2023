@@ -4,7 +4,7 @@ metadata:
   name: be-deploy
   namespace: ld2023
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: backend
@@ -13,6 +13,13 @@ spec:
       labels:
         app: backend
     spec:
+      nodeSelector:
+        workload: ld2023
+      tolerations:
+        - key: "node.kubernetes.io/not-ready"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 30
       containers:
       - name: backend
         image: veon82/ld2023-be:latest
@@ -43,7 +50,7 @@ metadata:
   name: fe-deploy
   namespace: ld2023
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: frontend
@@ -52,6 +59,13 @@ spec:
       labels:
         app: frontend
     spec:
+      nodeSelector:
+        workload: ld2023
+      tolerations:
+        - key: "node.kubernetes.io/not-ready"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 30
       containers:
       - name: frontend
         image: veon82/ld2023-fe:latest

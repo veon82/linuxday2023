@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { sleep } from 'k6';
 
 export let options = {
-    vus: 10,
+    vus: 1,
     duration: '30s', // for 30 seconds
 };
 
@@ -38,27 +38,29 @@ const linuxDistros = [
     { name: "Bedrock Linux", description: "Distribuzione che permette di utilizzare pacchetti da altre distribuzioni Linux contemporaneamente", year: 2012 }
 ];
 
-function getRandomDistro() {
-    return linuxDistros[Math.floor(Math.random() * linuxDistros.length)];
-}
+// function getRandomDistro() {
+//     return linuxDistros[Math.floor(Math.random() * linuxDistros.length)];
+// }
 
-export default function() {
+function setDistro(distro) {
     const url = 'http://ld2023-demo/distros';
-    const distro = getRandomDistro();
-
     const payload = JSON.stringify({
         name: distro.name,
         year: distro.year,
         description: distro.description
     });
-
     const params = {
         headers: {
             'Content-Type': 'application/json',
         },
     };
-
     http.post(url, payload, params);
+
+}
+
+export default function() {
+    // const distro = getRandomDistro();
+    linuxDistros.forEach(distro => setDistro(distro));
 
     sleep(1);
 }

@@ -22,5 +22,8 @@ kubectl create secret generic mdb-password --from-literal=MONGODB_PASSWORD=<PASS
 kubectl logs -f -l app=frontend --all-containers -n ld2023
 ```
 
+## Set label on node
 
-
+```
+kubectl label nodes rpi-k3s-wrk-3 workload=ld2023
+```
