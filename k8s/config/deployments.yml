@@ -20,6 +20,10 @@ spec:
           operator: "Exists"
           effect: "NoExecute"
           tolerationSeconds: 30
+        - key: "node.kubernetes.io/unreachable"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 10
       containers:
       - name: backend
         image: veon82/ld2023-be:latest
@@ -66,6 +70,10 @@ spec:
           operator: "Exists"
           effect: "NoExecute"
           tolerationSeconds: 30
+        - key: "node.kubernetes.io/unreachable"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 10
       containers:
       - name: frontend
         image: veon82/ld2023-fe:latest

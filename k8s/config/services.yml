@@ -10,7 +10,6 @@ spec:
   - protocol: TCP
     port: 3001
     targetPort: 80
-  # type: LoadBalancer  # Usa LoadBalancer per distribuire il traffico su più nodi
 
 ---
 apiVersion: v1
@@ -25,4 +24,4 @@ spec:
   - protocol: TCP
     port: 3000
     targetPort: 3000
-  # type: LoadBalancer  # Usa LoadBalancer per distribuire il traffico su più nodi
+
