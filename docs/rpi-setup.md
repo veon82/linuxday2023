@@ -12,12 +12,12 @@ Before proceed writing go to the advanced options page clicking on the wheel ico
 
 Please note that the **best choice** would be to use a wired connection through the ethernet cable and setup a static IP address for each RPI that you are going to use. Anyway the network settings can be changed in a second moment.
 
-![RPI-imaged-advanced-options](rpi-imager.png)
+![RPI-imaged-advanced-options](../rpi/rpi-imager.png)
 
 Now you can write the image to the SD card.
 
-Optionally enable the serial debug editing `config.txt` and adding `enable_uart=1` at the bottom.
+Enable the serial debug editing `config.txt` and adding `enable_uart=1` at the bottom.
 
 If you have a USB serial connector connect the wires like showed in this picture
 
-![UART connection](uart_connection.jpg)
+![UART connection](../rpi/uart_connection.jpg)
