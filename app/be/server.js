@@ -32,19 +32,20 @@ app.get("/healthz", async (req, res) => {
 });
 
 app.get('/distros', async (req, res) => {
+    console.log(req.method, req.url);
     const allDistros = await Distro.find();
-    console.log(allDistros);
     return res.status(200).json(allDistros);
-    
 });
 
 app.get("/distros/:id", async (req, res) => {
+    console.log(req.method, req.url);
     const { id } = req.params;
     const distro = await Distro.findById(id);
     return res.status(200).json(distro);
 });
 
 app.post('/distros', async (req, res) => {
+    console.log(req.method, req.url);
     console.log({...req.body});
     const newDistro = new Distro({ ...req.body});
     const insertedDistro = await newDistro.save();
@@ -53,5 +54,5 @@ app.post('/distros', async (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log('Server running on port 3000');
+    console.log('LD2023 Server - running on port 3000');
 });
